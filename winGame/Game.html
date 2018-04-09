@@ -357,24 +357,24 @@
 	//碰撞检测
 		//消除越出屏幕的敌机
 		function enemyPlaneOut(){
-			if( !staticAssets.enemyList.length > 0){ return ;}
+			if( !staticAssets.enemyList.length > 0 ){ return ;}
 			staticAssets.enemyList = staticAssets.enemyList.filter(
 				enemy =>  !(enemy.x + 400 < 0 || enemy.x > canvas.width || enemy.y - 300 > canvas.height) 
 			);
 		}
 		//消除越出屏幕的子弹
 		function bulletsOut(){
-			if( !staticAssets.selfList.length > 0){ return ;}
+			if( !staticAssets.selfList.length > 0 ){ return ;}
 			staticAssets.bulletList = staticAssets.bulletList.filter(
 				bullets => bullets.sumY <= canvas.height && bullets.sumY > -10
 			);
 		}
 		//消除与敌机碰撞的子弹 并且计算敌机血量
 		function attackEnemy(){
-			if( !staticAssets.enemyList.length > 0){ return ;}
+			if( !staticAssets.enemyList.length > 0 ){ return ;}
 			staticAssets.bulletList = staticAssets.bulletList.filter(
 				bullet => {
-					for( let i = 0; i < staticAssets.enemyList.length; i++){
+					for( let i = 0; i < staticAssets.enemyList.length; i++ ){
 						let enemy = staticAssets.enemyList[i];
 						if(bullet.sumY >= enemy.y && bullet.sumY <= enemy.y + enemy.height && bullet.x >= enemy.x && bullet.x < enemy.x + enemy.width ){
 							enemy.HP -= 1;
@@ -387,13 +387,13 @@
 		}
 		//飞机与敌机碰撞
 		function planeCollide(){
-			if( !staticAssets.selfList.length > 0){ return ;}
-			if( !staticAssets.enemyList.length > 0){ return ;}
+			if( !staticAssets.selfList.length > 0 ){ return ;}
+			if( !staticAssets.enemyList.length > 0 ){ return ;}
 			//用filter函数 不用写for！！！！
 			let self = staticAssets.selfList[0];
 			staticAssets.enemyList = staticAssets.enemyList.filter(
 				enemy => {
-					if( self.x + self.width >= enemy.x && self.x <= enemy.x + enemy.width && self.y + self.height >= enemy.y && self.y <= enemy.y + enemy.height){
+					if( self.x + self.width >= enemy.x && self.x <= enemy.x + enemy.width && self.y + self.height >= enemy.y && self.y <= enemy.y + enemy.height ){
 						self.HP = -1;
 						//console.log("self.HP" + self.HP);
 					}
@@ -402,7 +402,7 @@
 		}
 		//消除死亡的飞机 计算分数
 		function eliminateDied(){
-			staticAssets.enemyList = staticAssets.enemyList.filter(　enemy =>　
+			staticAssets.enemyList = staticAssets.enemyList.filter( enemy =>　
 				{
 					if( enemy.destory && staticAssets.selfList.length > 0 ){
 						staticAssets.selfList[0].score += enemy.worth;
@@ -535,13 +535,10 @@
 		//秒杀全屏敌机
 		function BoomEnemy(){
 			//staticAssets.enemyList = staticAssets.enemyList.map( enemy => enemy.HP = -1 )
-			staticAssets.enemyList = staticAssets.enemyList.filter( enemy => {enemy.HP = -1;return true })
+			staticAssets.enemyList = staticAssets.enemyList.filter( enemy => { enemy.HP = -1;return true })
 		}
 
-
-
-
-
+	//执行各个函数
 		var interval1;
 		function startGame(){ 
 			setTimeout(function(){
@@ -580,7 +577,6 @@
 		}
 		startGame();
 		enemyFactory();
-
 
 	</script>
 </body>
